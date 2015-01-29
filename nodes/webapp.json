@@ -1,0 +1,6 @@
+{
+  "run_list": [
+    "recipe[security_check_glibc]",
+    "recipe[security_update_glibc]"
+  ]
+}

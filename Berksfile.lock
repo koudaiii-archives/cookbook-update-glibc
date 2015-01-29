@@ -1,0 +1,17 @@
+DEPENDENCIES
+  security_check_glibc
+    path: site-cookbooks/security_check_glibc
+  security_update_glibc
+    path: site-cookbooks/security_update_glibc
+
+GRAPH
+  apt (2.6.1)
+  build-essential (2.1.3)
+  security_check_glibc (0.1.0)
+    build-essential (>= 0.0.0)
+  security_update_glibc (0.1.0)
+    apt (>= 0.0.0)
+    yum-epel (>= 0.0.0)
+  yum (3.5.2)
+  yum-epel (0.6.0)
+    yum (~> 3.0)
