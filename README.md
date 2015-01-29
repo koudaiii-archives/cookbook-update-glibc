@@ -39,16 +39,33 @@ update glibc by Chef Solo.
 bundle install
 ```
 
-* build berks
+* set node
+
+```json
+{
+  "run_list": [
+    "recipe[security_check_glibc]", # set exploit code and compile
+    "recipe[security_update_glibc]" # node reboot after glibc update
+  ]
+}
+```
+
+* set test(default webapp)
 
 ```bash
-bundle exec berks vendor cookbooks
+$ mv spec/webapp spec/YourServer
+```
+
+* test
+
+```bash
+$ rake spec LOGIN_USER=loginuser PASS=userpassword
 ```
 
 * provision server
 
 ```bash
-bundle exec knife solo bootstrap YourServer
+$ bundle exec knife solo bootstrap YourServer
 ```
 
 ### Develop(Vagrant)
@@ -76,6 +93,18 @@ vagrant ssh-config >> ~/.ssh/config
 $ vim ~/.ssh/config
 - Host default
 + Host webapp
+```
+
+* test
+
+```bash
+$ rake spec LOGIN_USER=vagrant PASS=vagrant
+```
+
+* provision server
+
+```bash
+$ bundle exec knife solo bootstrap webapp
 ```
 
 * This Vagrant has been correspondence is complete.(glibc-2.12-1.149.el6_6.5.x86_64)
